@@ -1,140 +1,176 @@
 //
 //  ViewController.m
-//  Intro_iOS_Camera
+//  openCViOSFaceTrackingTutorial
 //
-//  Created by Simon Lucey on 9/7/15.
-//  Copyright (c) 2015 CMU_16432. All rights reserved.
+//  Created by Evangelos Georgiou on 16/03/2013.
+//  Copyright (c) 2013 Evangelos Georgiou. All rights reserved.
 //
 
-#import "ViewController.h"
+#include <opencv2/opencv.hpp>
 
-// Include stdlib.h and std namespace so we can mix C++ code in here
-#include <stdlib.h>
-using namespace std;
+#define CHESSBOARD_WIDTH 6
+#define CHESSBOARD_HEIGHT 5
 
-@interface ViewController()
-{
-    UIImageView *liveView_; // Live output from the camera
-    UIImageView *resultView_; // Preview view of everything...
-    UIButton *takephotoButton_, *goliveButton_; // Button to initiate OpenCV processing of image
-    CvPhotoCamera *photoCamera_; // OpenCV wrapper class to simplfy camera access through AVFoundation
+#include "ViewController.h"
+
+NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
+
+@interface ViewController (){
+    Mat display;
+    vector<cv::Point2f> src;			// Source Points basically the 4 end co-ordinates of the overlay image
+    vector<cv::Point2f> dst;			// Destination Points to transform overlay image
+    Mat lastImg;
+    
 }
 @end
 
 @implementation ViewController
 
+@synthesize videoCamera;
 
-//===============================================================================================
-// Setup view for excuting App
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
     // Do any additional setup after loading the view, typically from a nib.
     
-    // 1. Setup the your OpenCV view, so it takes up the entire App screen......
-    int view_width = self.view.frame.size.width;
-    int view_height = (640*view_width)/480; // Work out the viw-height assuming 640x480 input
-    int view_offset = (self.view.frame.size.height - view_height)/2;
-    liveView_ = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, view_offset, view_width, view_height)];
-    [self.view addSubview:liveView_]; // Important: add liveView_ as a subview
-    //resultView_ = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 960, 1280)];
-    resultView_ = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, view_offset, view_width, view_height)];
-    [self.view addSubview:resultView_]; // Important: add resultView_ as a subview
-    resultView_.hidden = true; // Hide the view
+    self.videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
+    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
+    self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
+    self.videoCamera.defaultFPS = 30;
+    self.videoCamera.grayscaleMode = NO;
+    self.videoCamera.delegate = self;
     
-    // 2. First setup a button to take a single picture
-    takephotoButton_ = [self simpleButton:@"Take Photo" buttonColor:[UIColor redColor]];
-    // Important part that connects the action to the member function buttonWasPressed
-    [takephotoButton_ addTarget:self action:@selector(buttonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    UIImage *image = [UIImage imageNamed:@"shingani.jpg"];
+    display = [self cvMatFromUIImage:image];
     
-    // 3. Setup another button to go back to live video
-    goliveButton_ = [self simpleButton:@"Go Live" buttonColor:[UIColor greenColor]];
-    // Important part that connects the action to the member function buttonWasPressed
-    [goliveButton_ addTarget:self action:@selector(liveWasPressed) forControlEvents:UIControlEventTouchUpInside];
-    [goliveButton_ setHidden:true]; // Hide the button
-    
-    // 4. Initialize the camera parameters and start the camera (inside the App)
-    photoCamera_ = [[CvPhotoCamera alloc] initWithParentView:liveView_];
-    photoCamera_.delegate = self;
-    
-    // This chooses whether we use the front or rear facing camera
-    photoCamera_.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
-    
-    // This is used to set the image resolution
-    photoCamera_.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
-    
-    // This is used to determine the device orientation
-    photoCamera_.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
-    
-    // This starts the camera capture
-    [photoCamera_ start];
-    
+    src.push_back(cv::Point2f(0,0));
+    src.push_back(cv::Point2f(display.cols,0));
+    src.push_back(cv::Point2f(display.cols, display.rows));
+    src.push_back(cv::Point2f(0, display.rows));
 }
 
-//===============================================================================================
-// This member function is executed when the button is pressed
-- (void)buttonWasPressed {
-    [photoCamera_ takePicture];
-}
-//===============================================================================================
-// This member function is executed when the button is pressed
-- (void)liveWasPressed {
-    [takephotoButton_ setHidden:false]; [goliveButton_ setHidden:true]; // Switch visibility of buttons
-    resultView_.hidden = true; // Hide the result view again
-    [photoCamera_ start];
-}
-//===============================================================================================
-// To be compliant with the CvPhotoCameraDelegate we need to implement these two methods
-- (void)photoCamera:(CvPhotoCamera *)photoCamera capturedImage:(UIImage *)image
+- (void)didReceiveMemoryWarning
 {
-    [photoCamera_ stop];
-    resultView_.hidden = false; // Turn the hidden view on
-    
-    // You can apply your OpenCV code HERE!!!!!
-    // If you want, you can ignore the rest of the code base here, and simply place
-    // your OpenCV code here to process images.
-    cv::Mat cvImage; UIImageToMat(image, cvImage);
-    cv::Mat gray; cv::cvtColor(cvImage, gray, CV_RGBA2GRAY); // Convert to grayscale
-    cv::GaussianBlur(gray, gray, cv::Size(5,5), 1.2, 1.2); // Apply Gaussian blur
-    cv::Mat edges; cv::Canny(gray, edges, 0, 50); // Estimate edge map using Canny edge detector
-    UIImage *resImage = MatToUIImage(edges);
-    
-    // Special part to ensure the image is rotated properly when the image is converted back
-    resultView_.image =  [UIImage imageWithCGImage:[resImage CGImage]
-                                             scale:1.0
-                                       orientation: UIImageOrientationLeftMirrored];
-    [takephotoButton_ setHidden:true]; [goliveButton_ setHidden:false]; // Switch visibility of buttons
-}
-- (void)photoCameraCancel:(CvPhotoCamera *)photoCamera
-{
-    
-}
-//===============================================================================================
-// Simple member function to initialize buttons in the bottom of the screen so we do not have to
-// bother with storyboard, and can go straight into vision on mobiles
-//
-- (UIButton *) simpleButton:(NSString *)buttonName buttonColor:(UIColor *)color
-{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom]; // Initialize the button
-    // Bit of a hack, but just positions the button at the bottom of the screen
-    int button_width = 200; int button_height = 50; // Set the button height and width (heuristic)
-    // Botton position is adaptive as this could run on a different device (iPAD, iPhone, etc.)
-    int button_x = (self.view.frame.size.width - button_width)/2; // Position of top-left of button
-    int button_y = self.view.frame.size.height - 80; // Position of top-left of button
-    button.frame = CGRectMake(button_x, button_y, button_width, button_height); // Position the button
-    [button setTitle:buttonName forState:UIControlStateNormal]; // Set the title for the button
-    [button setTitleColor:color forState:UIControlStateNormal]; // Set the color for the title
-    
-    [self.view addSubview:button]; // Important: add the button as a subview
-    //[button setEnabled:bflag]; [button setHidden:(!bflag)]; // Set visibility of the button
-    return button; // Return the button pointer
-}
-
-//===============================================================================================
-// Standard memory warning component added by Xcode
-- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Protocol CvVideoCameraDelegate
+
+#ifdef __cplusplus
+- (void)processImage:(Mat&)img;
+{
+    cv::Size board_size(CHESSBOARD_WIDTH-1, CHESSBOARD_HEIGHT-1);
+    
+    vector<cv::Point2f> corners;
+    
+    Mat cpy_img(img.rows, img.cols, img.type());
+    Mat neg_img(img.rows, img.cols, img.type());
+    Mat gray;
+    Mat blank(display.rows, display.cols, display.type());
+    
+    cvtColor(img, gray, CV_BGR2GRAY);
+    
+    bool found = false;
+    
+    if(dst.size() == 0){
+        std::cout << "WTF DO YOUR JOB, BIATCH!" << std::endl;
+    }else{
+        std::cout << "WTF MAN " <<  dst.size() <<std::endl;
+    }
+    if(dst.size() == 0){
+        bool flag = findChessboardCorners(img, board_size, corners);
+
+        if(flag == 1){
+            // This function identifies the chessboard pattern from the gray image, saves the valid group of corners
+            cornerSubPix(gray, corners, cv::Size(11,11), cv::Size(-1,-1), TermCriteria(CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1));
+            found = true;
+            
+            dst.push_back(corners[0]);
+            dst.push_back(corners[CHESSBOARD_WIDTH-2]);
+            dst.push_back(corners[(CHESSBOARD_WIDTH-1)*(CHESSBOARD_HEIGHT-1)-1]);
+            dst.push_back(corners[(CHESSBOARD_WIDTH-1)*(CHESSBOARD_HEIGHT-2)]);
+        }
+    }else{
+        vector<uchar> status;
+        Mat error;
+        cv::calcOpticalFlowPyrLK(lastImg, gray, dst, corners, status, error);
+        dst.clear();
+        
+        found = true;
+        
+        for(int i=0; i<status.size();i++){
+            if(status[i] == 0){
+                found = false;
+                break;
+            }
+        }
+        
+        if(found){
+            dst = corners;
+        }
+    }
+    
+    if(found){
+        
+        
+        // Compute the transformation matrix,
+        // i.e., transformation required to overlay the display image from 'src' points to 'dst' points on the image
+        Mat warp_matrix = getPerspectiveTransform(src, dst);
+        
+        blank = cv::Scalar(0);
+        neg_img = cv::Scalar(0);								// Image is white when pixel values are zero
+        cpy_img = cv::Scalar(0);								// Image is white when pixel values are zero
+        
+        bitwise_not(blank,blank);
+        
+        // Note the jugglery to augment due to OpenCV's limitation passing two images of DIFFERENT sizes while using "cvWarpPerspective"
+        
+        warpPerspective(display, neg_img, warp_matrix, cv::Size(neg_img.cols, neg_img.rows));	// Transform overlay Image to the position	- [ITEM1]
+        warpPerspective(blank, cpy_img, warp_matrix, cv::Size(cpy_img.cols, neg_img.rows));		// Transform a blank overlay image to position
+        bitwise_not(cpy_img, cpy_img);							// Invert the copy paper image from white to black
+        bitwise_and(cpy_img, img, cpy_img);						// Create a "hole" in the Image to create a "clipping" mask - [ITEM2]
+        bitwise_or(cpy_img, neg_img, img);						// Finally merge both items [ITEM1 & ITEM2]
+    }
+
+    lastImg = gray;
+}
+#endif
+
+- (cv::Mat)cvMatFromUIImage:(UIImage *)image
+{
+    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
+    CGFloat cols = image.size.width;
+    CGFloat rows = image.size.height;
+    
+    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
+    
+    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
+                                                    cols,                       // Width of bitmap
+                                                    rows,                       // Height of bitmap
+                                                    8,                          // Bits per component
+                                                    cvMat.step[0],              // Bytes per row
+                                                    colorSpace,                 // Colorspace
+                                                    kCGImageAlphaNoneSkipLast |
+                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
+    
+    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
+    CGContextRelease(contextRef);
+    
+    return cvMat;
+}
+
+#pragma mark - UI Actions
+
+- (IBAction)startCamera:(id)sender
+{
+    [self.videoCamera start];
+}
+
+- (IBAction)stopCamera:(id)sender
+{
+    [self.videoCamera stop];
 }
 
 @end

@@ -16,6 +16,15 @@
 		52DD7FD31B9DF03B001257DD /* Intro_iOS_CameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DD7FD21B9DF03B001257DD /* Intro_iOS_CameraTests.m */; };
 		52DD7FDD1B9DF0A5001257DD /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DD7FDC1B9DF0A5001257DD /* opencv2.framework */; };
 		52DD7FDF1B9DF0BB001257DD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DD7FDE1B9DF0BB001257DD /* AVFoundation.framework */; };
+		EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE180F7B1C1376A5002F37CF /* shingani.jpg */; settings = {ASSET_TAGS = (); }; };
+		EE5009901C12B67500920363 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE50098E1C12B67500920363 /* CoreImage.framework */; };
+		EE5009911C12B67500920363 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE50098F1C12B67500920363 /* ImageIO.framework */; };
+		EE5009931C12B68300920363 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5009921C12B68300920363 /* CoreVideo.framework */; };
+		EE5009951C12B68D00920363 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5009941C12B68D00920363 /* CoreMedia.framework */; };
+		EE7296431BA26C0600C6D3A0 /* haarcascade_eye.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296411BA26C0600C6D3A0 /* haarcascade_eye.xml */; settings = {ASSET_TAGS = (); }; };
+		EE7296441BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296421BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml */; settings = {ASSET_TAGS = (); }; };
+		EE7296461BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296451BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml */; settings = {ASSET_TAGS = (); }; };
+		EE79BB721C12D8EB00D8BD0B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE79BB711C12D8EB00D8BD0B /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,15 @@
 		52DD7FD21B9DF03B001257DD /* Intro_iOS_CameraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Intro_iOS_CameraTests.m; sourceTree = "<group>"; };
 		52DD7FDC1B9DF0A5001257DD /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		52DD7FDE1B9DF0BB001257DD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EE180F7B1C1376A5002F37CF /* shingani.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = shingani.jpg; path = ../../../../../../Downloads/simplar2/shingani.jpg; sourceTree = "<group>"; };
+		EE50098E1C12B67500920363 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		EE50098F1C12B67500920363 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		EE5009921C12B68300920363 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		EE5009941C12B68D00920363 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		EE7296411BA26C0600C6D3A0 /* haarcascade_eye.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye.xml; sourceTree = "<group>"; };
+		EE7296421BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt.xml; sourceTree = "<group>"; };
+		EE7296451BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye_tree_eyeglasses.xml; sourceTree = "<group>"; };
+		EE79BB711C12D8EB00D8BD0B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +69,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE79BB721C12D8EB00D8BD0B /* AssetsLibrary.framework in Frameworks */,
+				EE5009951C12B68D00920363 /* CoreMedia.framework in Frameworks */,
+				EE5009931C12B68300920363 /* CoreVideo.framework in Frameworks */,
+				EE5009901C12B67500920363 /* CoreImage.framework in Frameworks */,
+				EE5009911C12B67500920363 /* ImageIO.framework in Frameworks */,
 				52DD7FDF1B9DF0BB001257DD /* AVFoundation.framework in Frameworks */,
 				52DD7FDD1B9DF0A5001257DD /* opencv2.framework in Frameworks */,
 			);
@@ -69,6 +92,11 @@
 		52DD7FAA1B9DF03B001257DD = {
 			isa = PBXGroup;
 			children = (
+				EE79BB711C12D8EB00D8BD0B /* AssetsLibrary.framework */,
+				EE5009941C12B68D00920363 /* CoreMedia.framework */,
+				EE5009921C12B68300920363 /* CoreVideo.framework */,
+				EE50098E1C12B67500920363 /* CoreImage.framework */,
+				EE50098F1C12B67500920363 /* ImageIO.framework */,
 				52DD7FDE1B9DF0BB001257DD /* AVFoundation.framework */,
 				52DD7FDC1B9DF0A5001257DD /* opencv2.framework */,
 				52DD7FB51B9DF03B001257DD /* Intro_iOS_Camera */,
@@ -104,6 +132,10 @@
 		52DD7FB61B9DF03B001257DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EE180F7B1C1376A5002F37CF /* shingani.jpg */,
+				EE7296451BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml */,
+				EE7296411BA26C0600C6D3A0 /* haarcascade_eye.xml */,
+				EE7296421BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml */,
 				52DD7FB71B9DF03B001257DD /* Info.plist */,
 				52DD7FB81B9DF03B001257DD /* main.m */,
 			);
@@ -176,6 +208,7 @@
 				TargetAttributes = {
 					52DD7FB21B9DF03B001257DD = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = ERNTN4R8KQ;
 					};
 					52DD7FCB1B9DF03B001257DD = {
 						CreatedOnToolsVersion = 6.4;
@@ -207,9 +240,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7296441BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml in Resources */,
+				EE7296431BA26C0600C6D3A0 /* haarcascade_eye.xml in Resources */,
+				EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */,
 				52DD7FC21B9DF03B001257DD /* Main.storyboard in Resources */,
 				52DD7FC71B9DF03B001257DD /* LaunchScreen.xib in Resources */,
 				52DD7FC41B9DF03B001257DD /* Images.xcassets in Resources */,
+				EE7296461BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,13 +394,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"DYLIB_COMPATIBILITY_VERSION[arch=*]" = "";
+				"DYLIB_CURRENT_VERSION[arch=*]" = "";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Intro_iOS_Camera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Enxhell.Intro-iOS-Camera";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -371,13 +415,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Intro_iOS_Camera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Enxhell.Intro-iOS-Camera";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -434,6 +483,7 @@
 				52DD7FD81B9DF03B001257DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52DD7FD91B9DF03B001257DD /* Build configuration list for PBXNativeTarget "Intro_iOS_CameraTests" */ = {
 			isa = XCConfigurationList;
@@ -442,6 +492,7 @@
 				52DD7FDB1B9DF03B001257DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
