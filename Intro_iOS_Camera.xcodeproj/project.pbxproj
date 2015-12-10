@@ -16,15 +16,24 @@
 		52DD7FD31B9DF03B001257DD /* Intro_iOS_CameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DD7FD21B9DF03B001257DD /* Intro_iOS_CameraTests.m */; };
 		52DD7FDD1B9DF0A5001257DD /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DD7FDC1B9DF0A5001257DD /* opencv2.framework */; };
 		52DD7FDF1B9DF0BB001257DD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DD7FDE1B9DF0BB001257DD /* AVFoundation.framework */; };
-		EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE180F7B1C1376A5002F37CF /* shingani.jpg */; settings = {ASSET_TAGS = (); }; };
+		EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE180F7B1C1376A5002F37CF /* shingani.jpg */; };
 		EE5009901C12B67500920363 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE50098E1C12B67500920363 /* CoreImage.framework */; };
 		EE5009911C12B67500920363 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE50098F1C12B67500920363 /* ImageIO.framework */; };
 		EE5009931C12B68300920363 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5009921C12B68300920363 /* CoreVideo.framework */; };
 		EE5009951C12B68D00920363 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5009941C12B68D00920363 /* CoreMedia.framework */; };
-		EE7296431BA26C0600C6D3A0 /* haarcascade_eye.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296411BA26C0600C6D3A0 /* haarcascade_eye.xml */; settings = {ASSET_TAGS = (); }; };
-		EE7296441BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296421BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml */; settings = {ASSET_TAGS = (); }; };
-		EE7296461BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296451BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml */; settings = {ASSET_TAGS = (); }; };
+		EE7296431BA26C0600C6D3A0 /* haarcascade_eye.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296411BA26C0600C6D3A0 /* haarcascade_eye.xml */; };
+		EE7296441BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296421BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml */; };
+		EE7296461BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE7296451BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml */; };
 		EE79BB721C12D8EB00D8BD0B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE79BB711C12D8EB00D8BD0B /* AssetsLibrary.framework */; };
+		EEAEC7A61C1857A000F9F696 /* italy1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7A31C1857A000F9F696 /* italy1.jpg */; };
+		EEAEC7A71C1857A000F9F696 /* france1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7A41C1857A000F9F696 /* france1.jpg */; };
+		EEAEC7A81C1857A000F9F696 /* kosovo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7A51C1857A000F9F696 /* kosovo1.jpg */; };
+		EEAEC7AA1C19042C00F9F696 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAEC7A91C19042C00F9F696 /* GPUImage.framework */; };
+		EEAEC7AC1C19043E00F9F696 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAEC7AB1C19043E00F9F696 /* OpenGLES.framework */; };
+		EEAEC7AE1C19044900F9F696 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEAEC7AD1C19044900F9F696 /* QuartzCore.framework */; };
+		EEAEC7B21C19636800F9F696 /* italy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7AF1C19636800F9F696 /* italy.jpg */; };
+		EEAEC7B31C19636800F9F696 /* france.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B01C19636800F9F696 /* france.png */; };
+		EEAEC7B41C19636800F9F696 /* kosovo.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B11C19636800F9F696 /* kosovo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +71,15 @@
 		EE7296421BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_alt.xml; sourceTree = "<group>"; };
 		EE7296451BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_eye_tree_eyeglasses.xml; sourceTree = "<group>"; };
 		EE79BB711C12D8EB00D8BD0B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		EEAEC7A31C1857A000F9F696 /* italy1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = italy1.jpg; sourceTree = "<group>"; };
+		EEAEC7A41C1857A000F9F696 /* france1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = france1.jpg; sourceTree = "<group>"; };
+		EEAEC7A51C1857A000F9F696 /* kosovo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kosovo1.jpg; sourceTree = "<group>"; };
+		EEAEC7A91C19042C00F9F696 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = Intro_iOS_Camera/GPUImage.framework; sourceTree = "<group>"; };
+		EEAEC7AB1C19043E00F9F696 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		EEAEC7AD1C19044900F9F696 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EEAEC7AF1C19636800F9F696 /* italy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = italy.jpg; path = ../../../../../italy.jpg; sourceTree = "<group>"; };
+		EEAEC7B01C19636800F9F696 /* france.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = france.png; path = ../../../../../france.png; sourceTree = "<group>"; };
+		EEAEC7B11C19636800F9F696 /* kosovo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kosovo.png; path = ../../../../../kosovo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +87,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEAEC7AE1C19044900F9F696 /* QuartzCore.framework in Frameworks */,
+				EEAEC7AC1C19043E00F9F696 /* OpenGLES.framework in Frameworks */,
+				EEAEC7AA1C19042C00F9F696 /* GPUImage.framework in Frameworks */,
 				EE79BB721C12D8EB00D8BD0B /* AssetsLibrary.framework in Frameworks */,
 				EE5009951C12B68D00920363 /* CoreMedia.framework in Frameworks */,
 				EE5009931C12B68300920363 /* CoreVideo.framework in Frameworks */,
@@ -92,6 +113,9 @@
 		52DD7FAA1B9DF03B001257DD = {
 			isa = PBXGroup;
 			children = (
+				EEAEC7AD1C19044900F9F696 /* QuartzCore.framework */,
+				EEAEC7AB1C19043E00F9F696 /* OpenGLES.framework */,
+				EEAEC7A91C19042C00F9F696 /* GPUImage.framework */,
 				EE79BB711C12D8EB00D8BD0B /* AssetsLibrary.framework */,
 				EE5009941C12B68D00920363 /* CoreMedia.framework */,
 				EE5009921C12B68300920363 /* CoreVideo.framework */,
@@ -132,6 +156,12 @@
 		52DD7FB61B9DF03B001257DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EEAEC7AF1C19636800F9F696 /* italy.jpg */,
+				EEAEC7B01C19636800F9F696 /* france.png */,
+				EEAEC7B11C19636800F9F696 /* kosovo.png */,
+				EEAEC7A31C1857A000F9F696 /* italy1.jpg */,
+				EEAEC7A41C1857A000F9F696 /* france1.jpg */,
+				EEAEC7A51C1857A000F9F696 /* kosovo1.jpg */,
 				EE180F7B1C1376A5002F37CF /* shingani.jpg */,
 				EE7296451BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml */,
 				EE7296411BA26C0600C6D3A0 /* haarcascade_eye.xml */,
@@ -240,11 +270,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEAEC7B31C19636800F9F696 /* france.png in Resources */,
 				EE7296441BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml in Resources */,
 				EE7296431BA26C0600C6D3A0 /* haarcascade_eye.xml in Resources */,
+				EEAEC7A81C1857A000F9F696 /* kosovo1.jpg in Resources */,
+				EEAEC7A61C1857A000F9F696 /* italy1.jpg in Resources */,
 				EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */,
+				EEAEC7B21C19636800F9F696 /* italy.jpg in Resources */,
 				52DD7FC21B9DF03B001257DD /* Main.storyboard in Resources */,
+				EEAEC7A71C1857A000F9F696 /* france1.jpg in Resources */,
 				52DD7FC71B9DF03B001257DD /* LaunchScreen.xib in Resources */,
+				EEAEC7B41C19636800F9F696 /* kosovo.png in Resources */,
 				52DD7FC41B9DF03B001257DD /* Images.xcassets in Resources */,
 				EE7296461BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml in Resources */,
 			);
@@ -402,6 +438,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Intro_iOS_Camera",
 				);
 				INFOPLIST_FILE = Intro_iOS_Camera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -421,6 +458,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Intro_iOS_Camera",
 				);
 				INFOPLIST_FILE = Intro_iOS_Camera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

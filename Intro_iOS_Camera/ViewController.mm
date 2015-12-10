@@ -7,6 +7,8 @@
 //
 
 #include <opencv2/opencv.hpp>
+#include <opencv2/nonfree/features2d.hpp>
+
 
 #define CHESSBOARD_WIDTH 6
 #define CHESSBOARD_HEIGHT 5
@@ -15,12 +17,22 @@
 
 NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
 
+#define KOSOVO 1
+#define FRANCE 2
+#define ITALY 3
+
 @interface ViewController (){
     Mat display;
     vector<cv::Point2f> src;			// Source Points basically the 4 end co-ordinates of the overlay image
     vector<cv::Point2f> dst;			// Destination Points to transform overlay image
     Mat lastImg;
     
+    Mat imgs[3];
+    cv::Mat siftDescriptors[3];
+    std::vector<cv::KeyPoint> keypoints[3];
+    
+    cv::FREAK extractor;
+    int flag;
 }
 @end
 
@@ -48,6 +60,33 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     src.push_back(cv::Point2f(display.cols,0));
     src.push_back(cv::Point2f(display.cols, display.rows));
     src.push_back(cv::Point2f(0, display.rows));
+    
+    UIImage *img0 = [UIImage imageNamed:@"kosovo.png"];
+    imgs[0] = [self cvMatFromUIImage:img0];
+    cvtColor(imgs[0], imgs[0], CV_BGR2GRAY);
+    
+    UIImage *img1 = [UIImage imageNamed:@"france.png"];
+    imgs[1] = [self cvMatFromUIImage:img1];
+    cvtColor(imgs[1], imgs[1], CV_BGR2GRAY);
+
+    UIImage *img2 = [UIImage imageNamed:@"italy.jpg"];
+    imgs[2] = [self cvMatFromUIImage:img2];
+    cvtColor(imgs[2], imgs[2], CV_BGR2GRAY);
+
+    
+    cv::SiftFeatureDetector detector = cv::SiftFeatureDetector(20);
+    
+    for(int i=0; i<3;i++){
+        detector.detect(imgs[i], keypoints[i]);
+    }
+    
+    std::cout << "SIFTS" << std::endl;
+    for(int i=0; i<3; i++){
+        extractor.compute(imgs[i], keypoints[i], siftDescriptors[i]);
+        std::cout << siftDescriptors[i].size() << std::endl;
+    }
+    flag = -1;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,6 +107,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     Mat cpy_img(img.rows, img.cols, img.type());
     Mat neg_img(img.rows, img.cols, img.type());
     Mat gray;
+    Mat blurred;
     Mat blank(display.rows, display.cols, display.type());
     
     cvtColor(img, gray, CV_BGR2GRAY);
@@ -75,22 +115,110 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     bool found = false;
     
     if(dst.size() == 0){
-        std::cout << "WTF DO YOUR JOB, BIATCH!" << std::endl;
+        std::cout << "DO YOUR JOB!" << std::endl;
     }else{
-        std::cout << "WTF MAN " <<  dst.size() <<std::endl;
+        std::cout << "MAN " <<  dst.size() <<std::endl;
     }
+    
+    
     if(dst.size() == 0){
-        bool flag = findChessboardCorners(img, board_size, corners);
-
-        if(flag == 1){
-            // This function identifies the chessboard pattern from the gray image, saves the valid group of corners
-            cornerSubPix(gray, corners, cv::Size(11,11), cv::Size(-1,-1), TermCriteria(CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1));
-            found = true;
+//        cv::resize(gray, blurred, cv::Size(0,0), 0.3, 0.5);
+        cv::GaussianBlur(gray, blurred, cv::Size(5,5), 2);
+        int lowThreshold = 20;
+        int ratio = 5;
+        cv::Canny( blurred, blurred, lowThreshold, lowThreshold*ratio, 3 );
+//        
+//        std::vector<cv::Vec4i> lines;
+//        std::map<std::pair<int,int>, int> frequency;
+//        
+//        HoughLinesP(blurred, lines, 1, CV_PI/180, 70, 30, 10);
+//        for (int i = 0; i < lines.size(); i++)
+//        {
+//            for (int j = i+1; j < lines.size(); j++)
+//            {
+//                cv::Point2f pt = computeIntersect(lines[i], lines[j]);
+//                if (pt.x >= 0 && pt.y >= 0){
+//                    corners.push_back(pt);
+//                    auto pair = std::make_pair(pt.x, pt.y);
+//                    if(frequency)
+//                    frequency.insert(std::make_pair()
+//                }
+//            }
+//        }
+//        
+//        for(int i=0; i< corners.size(); i++){
+//            circle(img, corners[i], 5, cv::Scalar(0,255,0));
+//        }
+//
+        
+        
+        // Find contours
+        std::vector<std::vector<cv::Point> > contours;
+        cv::findContours(blurred, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+        
+        std::vector<cv::Point> approx;
+        
+        
+        bool done = false;
+        for (int i = 0; i < contours.size() && !done; i++)
+        {
+            // Approximate contour with accuracy proportional
+            // to the contour perimeter
+            cv::approxPolyDP(cv::Mat(contours[i]), approx, cv::arcLength(cv::Mat(contours[i]), true)*0.02, true);
             
-            dst.push_back(corners[0]);
-            dst.push_back(corners[CHESSBOARD_WIDTH-2]);
-            dst.push_back(corners[(CHESSBOARD_WIDTH-1)*(CHESSBOARD_HEIGHT-1)-1]);
-            dst.push_back(corners[(CHESSBOARD_WIDTH-1)*(CHESSBOARD_HEIGHT-2)]);
+            // Skip small or non-convex objects
+            if (std::fabs(cv::contourArea(contours[i])) < 100 || !cv::isContourConvex(approx))
+                continue;
+            
+
+            if(approx.size() == 4){
+                
+                
+                for(int j=0;j<4;j++){
+                    cv::circle(img, approx[j], 5, Scalar(255,0,0));
+                    dst.push_back(cv::Point2f(approx[j].x,approx[j].y));
+                }
+                std::sort(dst.begin(), dst.end(),
+                          [](const cv::Point2f &a, const cv::Point2f &b)
+                          {
+                              if(a.x==b.x){
+                                  return a.y < b.y;
+                              }else{
+                                return (a.x < b.x);
+                              }
+                          });
+                
+
+                Mat sbImg = gray(cv::boundingRect(contours[i]));
+                
+                cv::SiftFeatureDetector detector = cv::SiftFeatureDetector(20);
+                std::vector<cv::KeyPoint> keypoint;
+                cv::Mat siftDescriptor;
+                
+                detector.detect(sbImg, keypoint);
+                extractor.compute(sbImg, keypoint, siftDescriptor);
+                std::cout << siftDescriptor.size() << std::endl;
+                
+                cv::BFMatcher matcher(cv::NORM_L2, true);
+                int maxMatches = -1;
+                
+                for(int k=0; k<3;k++){
+                    std::vector< cv::DMatch > matches;
+                    matcher.match(siftDescriptor, siftDescriptors[k], matches );
+                    if(matches.size() > maxMatches){
+                        std::cout << "Matches " << matches.size() << std::endl;
+                        maxMatches = (int)matches.size();
+                        flag = k+1;
+                    }
+                }
+                
+                if(maxMatches > 8){
+                    found = true;
+                    done=true;
+                }else{
+                    dst.clear();
+                }
+            }
         }
     }else{
         vector<uchar> status;
@@ -117,6 +245,9 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
         
         // Compute the transformation matrix,
         // i.e., transformation required to overlay the display image from 'src' points to 'dst' points on the image
+        
+        std::cout << "FLAG MAFAKA " << flag << std::endl;
+
         Mat warp_matrix = getPerspectiveTransform(src, dst);
         
         blank = cv::Scalar(0);
@@ -135,8 +266,34 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     }
 
     lastImg = gray;
+    
 }
 #endif
+
+double angle(cv::Point pt1, cv::Point pt2, cv::Point pt0)
+{
+    double dx1 = pt1.x - pt0.x;
+    double dy1 = pt1.y - pt0.y;
+    double dx2 = pt2.x - pt0.x;
+    double dy2 = pt2.y - pt0.y;
+    return (dx1*dx2 + dy1*dy2)/sqrt((dx1*dx1 + dy1*dy1)*(dx2*dx2 + dy2*dy2) + 1e-10);
+}
+
+cv::Point2f computeIntersect(cv::Vec4i a, cv::Vec4i b)
+{
+    int x1 = a[0], y1 = a[1], x2 = a[2], y2 = a[3];
+    int x3 = b[0], y3 = b[1], x4 = b[2], y4 = b[3];
+    
+    if (float d = ((float)(x1-x2) * (y3-y4)) - ((y1-y2) * (x3-x4)))
+    {
+        cv::Point2f pt;
+        pt.x = ((x1*y2 - y1*x2) * (x3-x4) - (x1-x2) * (x3*y4 - y3*x4)) / d;
+        pt.y = ((x1*y2 - y1*x2) * (y3-y4) - (y1-y2) * (x3*y4 - y3*x4)) / d;
+        return pt;
+    }
+    else
+        return cv::Point2f(-1, -1);
+}
 
 - (cv::Mat)cvMatFromUIImage:(UIImage *)image
 {
