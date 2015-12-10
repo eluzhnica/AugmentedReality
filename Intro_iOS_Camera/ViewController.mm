@@ -31,7 +31,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     cv::Mat siftDescriptors[3];
     std::vector<cv::KeyPoint> keypoints[3];
     
-    cv::FREAK extractor;
+    cv::SiftDescriptorExtractor extractor;
     int flag;
 }
 @end
@@ -44,7 +44,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+//    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)];
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
@@ -65,23 +65,19 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     imgs[0] = [self cvMatFromUIImage:img0];
     cvtColor(imgs[0], imgs[0], CV_BGR2GRAY);
     
-    UIImage *img1 = [UIImage imageNamed:@"france.png"];
+    UIImage *img1 = [UIImage imageNamed:@"us.jpg"];
     imgs[1] = [self cvMatFromUIImage:img1];
     cvtColor(imgs[1], imgs[1], CV_BGR2GRAY);
-
-    UIImage *img2 = [UIImage imageNamed:@"italy.jpg"];
-    imgs[2] = [self cvMatFromUIImage:img2];
-    cvtColor(imgs[2], imgs[2], CV_BGR2GRAY);
 
     
     cv::SiftFeatureDetector detector = cv::SiftFeatureDetector(20);
     
-    for(int i=0; i<3;i++){
+    for(int i=0; i<2;i++){
         detector.detect(imgs[i], keypoints[i]);
     }
     
     std::cout << "SIFTS" << std::endl;
-    for(int i=0; i<3; i++){
+    for(int i=0; i<2; i++){
         extractor.compute(imgs[i], keypoints[i], siftDescriptors[i]);
         std::cout << siftDescriptors[i].size() << std::endl;
     }
@@ -159,8 +155,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
         std::vector<cv::Point> approx;
         
         
-        bool done = false;
-        for (int i = 0; i < contours.size() && !done; i++)
+        for (int i = 0; i < contours.size(); i++)
         {
             // Approximate contour with accuracy proportional
             // to the contour perimeter
@@ -172,8 +167,6 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
             
 
             if(approx.size() == 4){
-                
-                
                 for(int j=0;j<4;j++){
                     cv::circle(img, approx[j], 5, Scalar(255,0,0));
                     dst.push_back(cv::Point2f(approx[j].x,approx[j].y));
@@ -191,7 +184,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
 
                 Mat sbImg = gray(cv::boundingRect(contours[i]));
                 
-                cv::SiftFeatureDetector detector = cv::SiftFeatureDetector(20);
+                cv::SiftFeatureDetector detector = cv::SiftFeatureDetector(40);
                 std::vector<cv::KeyPoint> keypoint;
                 cv::Mat siftDescriptor;
                 
@@ -200,21 +193,24 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
                 std::cout << siftDescriptor.size() << std::endl;
                 
                 cv::BFMatcher matcher(cv::NORM_L2, true);
-                int maxMatches = -1;
+                unsigned long maxMatches = 0;
+                std::cout << "Matches " << maxMatches << std::endl;
                 
-                for(int k=0; k<3;k++){
+                for(int k=0; k<2;k++){
                     std::vector< cv::DMatch > matches;
                     matcher.match(siftDescriptor, siftDescriptors[k], matches );
+                    std::cout << "Matches111 " << matches.size() << std::endl;
+                    
                     if(matches.size() > maxMatches){
                         std::cout << "Matches " << matches.size() << std::endl;
-                        maxMatches = (int)matches.size();
+                        maxMatches = matches.size();
                         flag = k+1;
                     }
                 }
-                
+                std::cout << "Matches Final " << maxMatches << std::endl;
                 if(maxMatches > 8){
                     found = true;
-                    done=true;
+                    break;
                 }else{
                     dst.clear();
                 }

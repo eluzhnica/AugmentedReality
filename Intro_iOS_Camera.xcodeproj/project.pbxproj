@@ -34,6 +34,7 @@
 		EEAEC7B21C19636800F9F696 /* italy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7AF1C19636800F9F696 /* italy.jpg */; };
 		EEAEC7B31C19636800F9F696 /* france.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B01C19636800F9F696 /* france.png */; };
 		EEAEC7B41C19636800F9F696 /* kosovo.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B11C19636800F9F696 /* kosovo.png */; };
+		EEAEC7B61C1972CF00F9F696 /* us.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B51C1972CF00F9F696 /* us.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		EEAEC7AF1C19636800F9F696 /* italy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = italy.jpg; path = ../../../../../italy.jpg; sourceTree = "<group>"; };
 		EEAEC7B01C19636800F9F696 /* france.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = france.png; path = ../../../../../france.png; sourceTree = "<group>"; };
 		EEAEC7B11C19636800F9F696 /* kosovo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kosovo.png; path = ../../../../../kosovo.png; sourceTree = "<group>"; };
+		EEAEC7B51C1972CF00F9F696 /* us.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = us.jpg; path = ../../../../../us.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		52DD7FB61B9DF03B001257DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EEAEC7B51C1972CF00F9F696 /* us.jpg */,
 				EEAEC7AF1C19636800F9F696 /* italy.jpg */,
 				EEAEC7B01C19636800F9F696 /* france.png */,
 				EEAEC7B11C19636800F9F696 /* kosovo.png */,
@@ -275,6 +278,7 @@
 				EE7296431BA26C0600C6D3A0 /* haarcascade_eye.xml in Resources */,
 				EEAEC7A81C1857A000F9F696 /* kosovo1.jpg in Resources */,
 				EEAEC7A61C1857A000F9F696 /* italy1.jpg in Resources */,
+				EEAEC7B61C1972CF00F9F696 /* us.jpg in Resources */,
 				EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */,
 				EEAEC7B21C19636800F9F696 /* italy.jpg in Resources */,
 				52DD7FC21B9DF03B001257DD /* Main.storyboard in Resources */,
