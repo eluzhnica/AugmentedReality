@@ -9,17 +9,34 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/nonfree/features2d.hpp>
 
-
 #define CHESSBOARD_WIDTH 6
 #define CHESSBOARD_HEIGHT 5
 
 #include "ViewController.h"
 
-NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
+#define COLORS_C 9
+#define LABEL_TOTAL 7
+#define PER_LABEL 5
 
-#define KOSOVO 1
-#define FRANCE 2
-#define ITALY 3
+int colors[COLORS_C][3] = {{255,255,255}, {0,0,255}, {0,255,0}, {255,0,0}, {0,128,255}, {0,255,255}, {255,0,255}, {255,255,0}, {0,0,0}};
+std::string flagname[LABEL_TOTAL] = {"kosovo", "france", "brazil", "china", "germany", "usa", "albania"};
+
+int color_index(Point3_<uchar>* p){
+    double distance = DBL_MAX;
+    int min_idx = 0;
+    for(int i=0; i<COLORS_C; i++){
+        int b = p->x;
+        int g = p->y;
+        int r = p->z;
+        
+        double dist = std::sqrt(std::pow(0.114*(colors[i][0] - b),2) + std::pow(0.587*(colors[i][1] - g),2) + std::pow((colors[i][2] - r)*0.299,2));
+        if(dist < distance){
+            distance = dist;
+            min_idx = i;
+        }
+    }
+    return min_idx;
+}
 
 @interface ViewController (){
     Mat display[2];
@@ -33,6 +50,8 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     
     cv::BriefDescriptorExtractor extractor;
     int flag;
+    
+    CvSVM SVM;
 }
 @end
 
@@ -89,6 +108,8 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     }
     flag = -1;
     
+    SVM.load("trainedSVM");
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,7 +124,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
 - (void)processImage:(Mat&)img;
 {
     cv::Size board_size(CHESSBOARD_WIDTH-1, CHESSBOARD_HEIGHT-1);
-    
+
     vector<cv::Point2f> corners;
     
     Mat cpy_img(img.rows, img.cols, img.type());
@@ -115,11 +136,6 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     
     bool found = false;
     
-    if(dst.size() == 0){
-        std::cout << "DO YOUR JOB!" << std::endl;
-    }else{
-        std::cout << "MAN " <<  dst.size() <<std::endl;
-    }
     
     
     if(dst.size() == 0){
@@ -178,7 +194,22 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
                     dst.push_back(cv::Point2f(approx[j].x,approx[j].y));
                 }
                 
-
+                float color_per_img[COLORS_C] = {0};
+                for(int r=0; r<img.rows; r++){
+                    for(int c=0;c<img.cols; c++){
+                        Point3_<uchar>* p = img.ptr<Point3_<uchar> >(r,c);
+                        int ind = color_index(p);
+                        color_per_img[ind]++;
+                    }
+                }
+                for(int r=0;r<COLORS_C;r++){
+                    color_per_img[r] /= img.rows*img.cols;
+                    color_per_img[r] *=100;
+                    std::cout << color_per_img[r] << std::endl;
+                }
+                
+                Mat test(COLORS_C, 1, CV_32FC1, color_per_img);
+                int nation = (int)SVM.predict(test);
                 Mat sbImg = gray(cv::boundingRect(contours[i]));
                 
                 cv::SiftFeatureDetector detector = cv::SiftFeatureDetector(40);
@@ -193,10 +224,10 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
                 unsigned long maxMatches = 0;
                 std::cout << "Matches " << maxMatches << std::endl;
                 
-                for(int k=0; k<2;k++){
+                //iterate only once (leaving the code so that one can easily change it to iterate to other values)
+                for(int k=nation; k<nation+1;k++){
                     std::vector< cv::DMatch > matches;
                     matcher.match(siftDescriptor, siftDescriptors[k], matches );
-                    std::cout << "Matches111 " << matches.size() << std::endl;
                     
                     if(matches.size() > (keypoints[k].size() < 70 ? (keypoints[k].size()*0.45) : keypoints[k].size()*0.4)){
                         std::cout << "Matches " << matches.size() << std::endl;
@@ -238,7 +269,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
         // Compute the transformation matrix,
         // i.e., transformation required to overlay the display image from 'src' points to 'dst' points on the image
         
-        std::cout << "FLAG MAFAKA " << flag << std::endl;
+        std::cout << "FLAG " << flag << std::endl;
         Mat blank(display[flag].rows, display[flag].cols, display[flag].type());
         
         Mat warp_matrix = getPerspectiveTransform(src[flag], dst);
@@ -248,7 +279,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
         cpy_img = cv::Scalar(0);								// Image is white when pixel values are zero
         
         bitwise_not(blank,blank);
-                
+        
         warpPerspective(display[flag], neg_img, warp_matrix, cv::Size(neg_img.cols, neg_img.rows));	// Transform overlay Image to the position	- [ITEM1]
         warpPerspective(blank, cpy_img, warp_matrix, cv::Size(cpy_img.cols, neg_img.rows));		// Transform a blank overlay image to position
         bitwise_not(cpy_img, cpy_img);							// Invert the copy paper image from white to black

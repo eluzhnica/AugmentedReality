@@ -17,6 +17,8 @@
 		52DD7FDD1B9DF0A5001257DD /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DD7FDC1B9DF0A5001257DD /* opencv2.framework */; };
 		52DD7FDF1B9DF0BB001257DD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DD7FDE1B9DF0BB001257DD /* AVFoundation.framework */; };
 		EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EE180F7B1C1376A5002F37CF /* shingani.jpg */; };
+		EE1E34811C1C5FF900F2023E /* fit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE1E347F1C1C5FF900F2023E /* fit.cpp */; };
+		EE1E348E1C1CCDAD00F2023E /* measureFPS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE1E348C1C1CCDAD00F2023E /* measureFPS.cpp */; };
 		EE5009901C12B67500920363 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE50098E1C12B67500920363 /* CoreImage.framework */; };
 		EE5009911C12B67500920363 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE50098F1C12B67500920363 /* ImageIO.framework */; };
 		EE5009931C12B68300920363 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5009921C12B68300920363 /* CoreVideo.framework */; };
@@ -74,6 +76,10 @@
 		52DD7FDC1B9DF0A5001257DD /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		52DD7FDE1B9DF0BB001257DD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EE180F7B1C1376A5002F37CF /* shingani.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = shingani.jpg; path = ../../../../../../Downloads/simplar2/shingani.jpg; sourceTree = "<group>"; };
+		EE1E347F1C1C5FF900F2023E /* fit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fit.cpp; sourceTree = "<group>"; };
+		EE1E34801C1C5FF900F2023E /* fit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = fit.hpp; sourceTree = "<group>"; };
+		EE1E348C1C1CCDAD00F2023E /* measureFPS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = measureFPS.cpp; sourceTree = "<group>"; };
+		EE1E348D1C1CCDAD00F2023E /* measureFPS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = measureFPS.hpp; sourceTree = "<group>"; };
 		EE50098E1C12B67500920363 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		EE50098F1C12B67500920363 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		EE5009921C12B68300920363 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -163,7 +169,11 @@
 		52DD7FB51B9DF03B001257DD /* Intro_iOS_Camera */ = {
 			isa = PBXGroup;
 			children = (
+				EE1E348C1C1CCDAD00F2023E /* measureFPS.cpp */,
+				EE1E348D1C1CCDAD00F2023E /* measureFPS.hpp */,
 				52DD7FBA1B9DF03B001257DD /* AppDelegate.h */,
+				EE1E347F1C1C5FF900F2023E /* fit.cpp */,
+				EE1E34801C1C5FF900F2023E /* fit.hpp */,
 				52DD7FBB1B9DF03B001257DD /* AppDelegate.m */,
 				52DD7FBD1B9DF03B001257DD /* ViewController.h */,
 				52DD7FBE1B9DF03B001257DD /* ViewController.mm */,
@@ -346,7 +356,9 @@
 			files = (
 				52DD7FBF1B9DF03B001257DD /* ViewController.mm in Sources */,
 				52DD7FBC1B9DF03B001257DD /* AppDelegate.m in Sources */,
+				EE1E348E1C1CCDAD00F2023E /* measureFPS.cpp in Sources */,
 				52DD7FB91B9DF03B001257DD /* main.m in Sources */,
+				EE1E34811C1C5FF900F2023E /* fit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +498,10 @@
 				);
 				INFOPLIST_FILE = Intro_iOS_Camera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/armadillo/6.200.4/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Enxhell.Intro-iOS-Camera";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -498,6 +514,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"DYLIB_CURRENT_VERSION[arch=*]" = "-larmadillo";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -506,6 +523,10 @@
 				);
 				INFOPLIST_FILE = Intro_iOS_Camera/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/armadillo/6.200.4/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Enxhell.Intro-iOS-Camera";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
