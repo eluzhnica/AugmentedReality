@@ -22,8 +22,8 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
 #define ITALY 3
 
 @interface ViewController (){
-    Mat display;
-    vector<cv::Point2f> src;			// Source Points basically the 4 end co-ordinates of the overlay image
+    Mat display[2];
+    vector<cv::Point2f> src[2];			// Source Points basically the 4 end co-ordinates of the overlay image
     vector<cv::Point2f> dst;			// Destination Points to transform overlay image
     Mat lastImg;
     
@@ -31,7 +31,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     cv::Mat siftDescriptors[3];
     std::vector<cv::KeyPoint> keypoints[3];
     
-    cv::SiftDescriptorExtractor extractor;
+    cv::BriefDescriptorExtractor extractor;
     int flag;
 }
 @end
@@ -53,33 +53,39 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     self.videoCamera.grayscaleMode = NO;
     self.videoCamera.delegate = self;
     
-    UIImage *image = [UIImage imageNamed:@"shingani.jpg"];
-    display = [self cvMatFromUIImage:image];
+    UIImage *image = [UIImage imageNamed:@"newborn.jpg"];
+    display[0] = [self cvMatFromUIImage:image];
     
-    src.push_back(cv::Point2f(0,0));
-    src.push_back(cv::Point2f(display.cols,0));
-    src.push_back(cv::Point2f(display.cols, display.rows));
-    src.push_back(cv::Point2f(0, display.rows));
+    UIImage *image1 = [UIImage imageNamed:@"chinese.jpg"];
+    display[1] = [self cvMatFromUIImage:image1];
+    
+    for(int i=0; i<2;i++){
+        src[i].push_back(cv::Point2f(0,0));
+        src[i].push_back(cv::Point2f(display[i].cols,0));
+        src[i].push_back(cv::Point2f(display[i].cols, display[i].rows));
+        src[i].push_back(cv::Point2f(0, display[i].rows));
+    }
     
     UIImage *img0 = [UIImage imageNamed:@"kosovo.png"];
     imgs[0] = [self cvMatFromUIImage:img0];
     cvtColor(imgs[0], imgs[0], CV_BGR2GRAY);
     
-    UIImage *img1 = [UIImage imageNamed:@"us.jpg"];
+    UIImage *img1 = [UIImage imageNamed:@"china.png"];
     imgs[1] = [self cvMatFromUIImage:img1];
     cvtColor(imgs[1], imgs[1], CV_BGR2GRAY);
 
     
-    cv::SiftFeatureDetector detector = cv::SiftFeatureDetector(20);
-    
     for(int i=0; i<2;i++){
-        detector.detect(imgs[i], keypoints[i]);
+        cv::FAST(imgs[i], keypoints[i], 9);
     }
+    
     
     std::cout << "SIFTS" << std::endl;
     for(int i=0; i<2; i++){
         extractor.compute(imgs[i], keypoints[i], siftDescriptors[i]);
         std::cout << siftDescriptors[i].size() << std::endl;
+        cv::KeyPointsFilter::retainBest(keypoints[i], 120);
+        std::cout << keypoints[i].size() << std::endl;
     }
     flag = -1;
     
@@ -104,7 +110,6 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     Mat neg_img(img.rows, img.cols, img.type());
     Mat gray;
     Mat blurred;
-    Mat blank(display.rows, display.cols, display.type());
     
     cvtColor(img, gray, CV_BGR2GRAY);
     
@@ -119,9 +124,9 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     
     if(dst.size() == 0){
 //        cv::resize(gray, blurred, cv::Size(0,0), 0.3, 0.5);
-        cv::GaussianBlur(gray, blurred, cv::Size(5,5), 2);
-        int lowThreshold = 20;
-        int ratio = 5;
+        cv::bilateralFilter(gray, blurred, 5, 20, 20);
+        int lowThreshold = 50;
+        int ratio = 3;
         cv::Canny( blurred, blurred, lowThreshold, lowThreshold*ratio, 3 );
 //        
 //        std::vector<cv::Vec4i> lines;
@@ -162,24 +167,16 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
             cv::approxPolyDP(cv::Mat(contours[i]), approx, cv::arcLength(cv::Mat(contours[i]), true)*0.02, true);
             
             // Skip small or non-convex objects
-            if (std::fabs(cv::contourArea(contours[i])) < 100 || !cv::isContourConvex(approx))
+            if (std::fabs(cv::contourArea(contours[i])) < 8000 || !cv::isContourConvex(approx))
                 continue;
             
 
             if(approx.size() == 4){
+                convexHull( Mat(approx), approx, true );
                 for(int j=0;j<4;j++){
                     cv::circle(img, approx[j], 5, Scalar(255,0,0));
                     dst.push_back(cv::Point2f(approx[j].x,approx[j].y));
                 }
-                std::sort(dst.begin(), dst.end(),
-                          [](const cv::Point2f &a, const cv::Point2f &b)
-                          {
-                              if(a.x==b.x){
-                                  return a.y < b.y;
-                              }else{
-                                return (a.x < b.x);
-                              }
-                          });
                 
 
                 Mat sbImg = gray(cv::boundingRect(contours[i]));
@@ -188,7 +185,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
                 std::vector<cv::KeyPoint> keypoint;
                 cv::Mat siftDescriptor;
                 
-                detector.detect(sbImg, keypoint);
+                cv::FAST(sbImg, keypoint,9);
                 extractor.compute(sbImg, keypoint, siftDescriptor);
                 std::cout << siftDescriptor.size() << std::endl;
                 
@@ -201,17 +198,16 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
                     matcher.match(siftDescriptor, siftDescriptors[k], matches );
                     std::cout << "Matches111 " << matches.size() << std::endl;
                     
-                    if(matches.size() > maxMatches){
+                    if(matches.size() > (keypoints[k].size() < 70 ? (keypoints[k].size()*0.45) : keypoints[k].size()*0.4)){
                         std::cout << "Matches " << matches.size() << std::endl;
                         maxMatches = matches.size();
-                        flag = k+1;
+                        found = true;
+                        flag = k;
+                        break;
                     }
                 }
                 std::cout << "Matches Final " << maxMatches << std::endl;
-                if(maxMatches > 8){
-                    found = true;
-                    break;
-                }else{
+                if(!found){
                     dst.clear();
                 }
             }
@@ -243,18 +239,17 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
         // i.e., transformation required to overlay the display image from 'src' points to 'dst' points on the image
         
         std::cout << "FLAG MAFAKA " << flag << std::endl;
-
-        Mat warp_matrix = getPerspectiveTransform(src, dst);
+        Mat blank(display[flag].rows, display[flag].cols, display[flag].type());
+        
+        Mat warp_matrix = getPerspectiveTransform(src[flag], dst);
         
         blank = cv::Scalar(0);
         neg_img = cv::Scalar(0);								// Image is white when pixel values are zero
         cpy_img = cv::Scalar(0);								// Image is white when pixel values are zero
         
         bitwise_not(blank,blank);
-        
-        // Note the jugglery to augment due to OpenCV's limitation passing two images of DIFFERENT sizes while using "cvWarpPerspective"
-        
-        warpPerspective(display, neg_img, warp_matrix, cv::Size(neg_img.cols, neg_img.rows));	// Transform overlay Image to the position	- [ITEM1]
+                
+        warpPerspective(display[flag], neg_img, warp_matrix, cv::Size(neg_img.cols, neg_img.rows));	// Transform overlay Image to the position	- [ITEM1]
         warpPerspective(blank, cpy_img, warp_matrix, cv::Size(cpy_img.cols, neg_img.rows));		// Transform a blank overlay image to position
         bitwise_not(cpy_img, cpy_img);							// Invert the copy paper image from white to black
         bitwise_and(cpy_img, img, cpy_img);						// Create a "hole" in the Image to create a "clipping" mask - [ITEM2]
@@ -262,6 +257,7 @@ NSString* const faceCascadeFilename = @"haarcascade_frontalface_alt2";
     }
 
     lastImg = gray;
+//    img = blurred;
     
 }
 #endif

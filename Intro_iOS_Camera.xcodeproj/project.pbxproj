@@ -35,6 +35,16 @@
 		EEAEC7B31C19636800F9F696 /* france.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B01C19636800F9F696 /* france.png */; };
 		EEAEC7B41C19636800F9F696 /* kosovo.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B11C19636800F9F696 /* kosovo.png */; };
 		EEAEC7B61C1972CF00F9F696 /* us.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B51C1972CF00F9F696 /* us.jpg */; };
+		EEAEC7B91C19896B00F9F696 /* newborn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B71C19896B00F9F696 /* newborn.jpg */; };
+		EEAEC7BA1C19896B00F9F696 /* liberty.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7B81C19896B00F9F696 /* liberty.jpg */; };
+		EEAEC7BD1C1990A300F9F696 /* sydney.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7BB1C1990A300F9F696 /* sydney.jpg */; };
+		EEAEC7C01C1991D300F9F696 /* australia.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7BF1C1991D300F9F696 /* australia.jpg */; };
+		EEAEC7C21C19927A00F9F696 /* france.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7C11C19927A00F9F696 /* france.jpg */; };
+		EEAEC7C61C19A05C00F9F696 /* germany.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7C51C19A05C00F9F696 /* germany.jpg */; };
+		EEAEC7C81C19A09E00F9F696 /* germany.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7C71C19A09E00F9F696 /* germany.png */; };
+		EEAEC7CA1C19A0ED00F9F696 /* german.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7C91C19A0ED00F9F696 /* german.jpg */; };
+		EEAEC7CC1C19A2C800F9F696 /* china.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7CB1C19A2C800F9F696 /* china.png */; };
+		EEAEC7CE1C19A3BF00F9F696 /* chinese.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EEAEC7CD1C19A3BF00F9F696 /* chinese.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +92,16 @@
 		EEAEC7B01C19636800F9F696 /* france.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = france.png; path = ../../../../../france.png; sourceTree = "<group>"; };
 		EEAEC7B11C19636800F9F696 /* kosovo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kosovo.png; path = ../../../../../kosovo.png; sourceTree = "<group>"; };
 		EEAEC7B51C1972CF00F9F696 /* us.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = us.jpg; path = ../../../../../us.jpg; sourceTree = "<group>"; };
+		EEAEC7B71C19896B00F9F696 /* newborn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = newborn.jpg; sourceTree = "<group>"; };
+		EEAEC7B81C19896B00F9F696 /* liberty.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = liberty.jpg; sourceTree = "<group>"; };
+		EEAEC7BB1C1990A300F9F696 /* sydney.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sydney.jpg; sourceTree = "<group>"; };
+		EEAEC7BF1C1991D300F9F696 /* australia.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = australia.jpg; sourceTree = "<group>"; };
+		EEAEC7C11C19927A00F9F696 /* france.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = france.jpg; sourceTree = "<group>"; };
+		EEAEC7C51C19A05C00F9F696 /* germany.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = germany.jpg; sourceTree = "<group>"; };
+		EEAEC7C71C19A09E00F9F696 /* germany.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = germany.png; sourceTree = "<group>"; };
+		EEAEC7C91C19A0ED00F9F696 /* german.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = german.jpg; sourceTree = "<group>"; };
+		EEAEC7CB1C19A2C800F9F696 /* china.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = china.png; sourceTree = "<group>"; };
+		EEAEC7CD1C19A3BF00F9F696 /* chinese.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chinese.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +178,16 @@
 		52DD7FB61B9DF03B001257DD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EEAEC7CD1C19A3BF00F9F696 /* chinese.jpg */,
+				EEAEC7CB1C19A2C800F9F696 /* china.png */,
+				EEAEC7C91C19A0ED00F9F696 /* german.jpg */,
+				EEAEC7C71C19A09E00F9F696 /* germany.png */,
+				EEAEC7C51C19A05C00F9F696 /* germany.jpg */,
+				EEAEC7C11C19927A00F9F696 /* france.jpg */,
+				EEAEC7BF1C1991D300F9F696 /* australia.jpg */,
+				EEAEC7BB1C1990A300F9F696 /* sydney.jpg */,
+				EEAEC7B71C19896B00F9F696 /* newborn.jpg */,
+				EEAEC7B81C19896B00F9F696 /* liberty.jpg */,
 				EEAEC7B51C1972CF00F9F696 /* us.jpg */,
 				EEAEC7AF1C19636800F9F696 /* italy.jpg */,
 				EEAEC7B01C19636800F9F696 /* france.png */,
@@ -277,15 +307,25 @@
 				EE7296441BA26C0600C6D3A0 /* haarcascade_frontalface_alt.xml in Resources */,
 				EE7296431BA26C0600C6D3A0 /* haarcascade_eye.xml in Resources */,
 				EEAEC7A81C1857A000F9F696 /* kosovo1.jpg in Resources */,
+				EEAEC7C01C1991D300F9F696 /* australia.jpg in Resources */,
 				EEAEC7A61C1857A000F9F696 /* italy1.jpg in Resources */,
+				EEAEC7BA1C19896B00F9F696 /* liberty.jpg in Resources */,
+				EEAEC7B91C19896B00F9F696 /* newborn.jpg in Resources */,
 				EEAEC7B61C1972CF00F9F696 /* us.jpg in Resources */,
+				EEAEC7CE1C19A3BF00F9F696 /* chinese.jpg in Resources */,
+				EEAEC7C61C19A05C00F9F696 /* germany.jpg in Resources */,
 				EE180F7C1C1376A5002F37CF /* shingani.jpg in Resources */,
 				EEAEC7B21C19636800F9F696 /* italy.jpg in Resources */,
 				52DD7FC21B9DF03B001257DD /* Main.storyboard in Resources */,
 				EEAEC7A71C1857A000F9F696 /* france1.jpg in Resources */,
 				52DD7FC71B9DF03B001257DD /* LaunchScreen.xib in Resources */,
+				EEAEC7C81C19A09E00F9F696 /* germany.png in Resources */,
+				EEAEC7C21C19927A00F9F696 /* france.jpg in Resources */,
 				EEAEC7B41C19636800F9F696 /* kosovo.png in Resources */,
+				EEAEC7CC1C19A2C800F9F696 /* china.png in Resources */,
 				52DD7FC41B9DF03B001257DD /* Images.xcassets in Resources */,
+				EEAEC7CA1C19A0ED00F9F696 /* german.jpg in Resources */,
+				EEAEC7BD1C1990A300F9F696 /* sydney.jpg in Resources */,
 				EE7296461BA271A000C6D3A0 /* haarcascade_eye_tree_eyeglasses.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
