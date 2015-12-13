@@ -3,6 +3,8 @@
 
 This implementation detects a national flag, classifies it and then it augments an image of a famous picture from that country on the flag. All this is done in real-time. The application is supposed to run on iOS devices therefore it is optimized for that architecture.
 
+Below is a demo of the app:
+
 [![Alt text for your video](https://i.ytimg.com/vi/8YtrPASa8Yc/default.jpg)](https://youtu.be/8YtrPASa8Yc)
 
 
