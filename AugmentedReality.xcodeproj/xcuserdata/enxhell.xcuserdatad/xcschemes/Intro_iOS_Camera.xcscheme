@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52DD7FB21B9DF03B001257DD"
-               BuildableName = "Intro_iOS_Camera.app"
-               BlueprintName = "Intro_iOS_Camera"
-               ReferencedContainer = "container:Intro_iOS_Camera.xcodeproj">
+               BuildableName = "AugmentedReality.app"
+               BlueprintName = "AugmentedReality"
+               ReferencedContainer = "container:AugmentedReality.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52DD7FCB1B9DF03B001257DD"
-               BuildableName = "Intro_iOS_CameraTests.xctest"
-               BlueprintName = "Intro_iOS_CameraTests"
-               ReferencedContainer = "container:Intro_iOS_Camera.xcodeproj">
+               BuildableName = "AugmentedReality.xctest"
+               BlueprintName = "AugmentedRealityTests"
+               ReferencedContainer = "container:AugmentedReality.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52DD7FB21B9DF03B001257DD"
-            BuildableName = "Intro_iOS_Camera.app"
-            BlueprintName = "Intro_iOS_Camera"
-            ReferencedContainer = "container:Intro_iOS_Camera.xcodeproj">
+            BuildableName = "AugmentedReality.app"
+            BlueprintName = "AugmentedReality"
+            ReferencedContainer = "container:AugmentedReality.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52DD7FB21B9DF03B001257DD"
-            BuildableName = "Intro_iOS_Camera.app"
-            BlueprintName = "Intro_iOS_Camera"
-            ReferencedContainer = "container:Intro_iOS_Camera.xcodeproj">
+            BuildableName = "AugmentedReality.app"
+            BlueprintName = "AugmentedReality"
+            ReferencedContainer = "container:AugmentedReality.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52DD7FB21B9DF03B001257DD"
-            BuildableName = "Intro_iOS_Camera.app"
-            BlueprintName = "Intro_iOS_Camera"
-            ReferencedContainer = "container:Intro_iOS_Camera.xcodeproj">
+            BuildableName = "AugmentedReality.app"
+            BlueprintName = "AugmentedReality"
+            ReferencedContainer = "container:AugmentedReality.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

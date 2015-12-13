@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9BC2F6660552ADE915F87A9951EC5E09B02FAC42",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9BC2F6660552ADE915F87A9951EC5E09B02FAC42" : 0,
+    "F2F968EF04C3E1CE3FD3B36C787C1B2DD9DD7F33" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D08CD04B-1E30-407D-B792-E59FF829506A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9BC2F6660552ADE915F87A9951EC5E09B02FAC42" : "Intro_iOS_Camera\/",
+    "F2F968EF04C3E1CE3FD3B36C787C1B2DD9DD7F33" : "..\/Assignment_1\/Estimate_PlanarWarps"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AugmentedReality",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AugmentedReality.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eluzhnica\/AugmentedReality.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9BC2F6660552ADE915F87A9951EC5E09B02FAC42"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/slucey-cs-cmu-edu\/Estimate_PlanarWarps",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2F968EF04C3E1CE3FD3B36C787C1B2DD9DD7F33"
+    }
+  ]
+}

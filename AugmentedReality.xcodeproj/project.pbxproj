@@ -151,8 +151,8 @@
 				EE50098F1C12B67500920363 /* ImageIO.framework */,
 				52DD7FDE1B9DF0BB001257DD /* AVFoundation.framework */,
 				52DD7FDC1B9DF0A5001257DD /* opencv2.framework */,
-				52DD7FB51B9DF03B001257DD /* Intro_iOS_Camera */,
-				52DD7FCF1B9DF03B001257DD /* Intro_iOS_CameraTests */,
+				52DD7FB51B9DF03B001257DD /* AugmentedReality */,
+				52DD7FCF1B9DF03B001257DD /* AugmentedReality_CameraTests */,
 				52DD7FB41B9DF03B001257DD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		52DD7FB51B9DF03B001257DD /* Intro_iOS_Camera */ = {
+		52DD7FB51B9DF03B001257DD /* AugmentedReality */ = {
 			isa = PBXGroup;
 			children = (
 				EE1E348C1C1CCDAD00F2023E /* measureFPS.cpp */,
@@ -182,6 +182,7 @@
 				52DD7FC51B9DF03B001257DD /* LaunchScreen.xib */,
 				52DD7FB61B9DF03B001257DD /* Supporting Files */,
 			);
+			name = AugmentedReality;
 			path = Intro_iOS_Camera;
 			sourceTree = "<group>";
 		};
@@ -215,12 +216,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		52DD7FCF1B9DF03B001257DD /* Intro_iOS_CameraTests */ = {
+		52DD7FCF1B9DF03B001257DD /* AugmentedReality_CameraTests */ = {
 			isa = PBXGroup;
 			children = (
 				52DD7FD21B9DF03B001257DD /* Intro_iOS_CameraTests.m */,
 				52DD7FD01B9DF03B001257DD /* Supporting Files */,
 			);
+			name = AugmentedReality_CameraTests;
 			path = Intro_iOS_CameraTests;
 			sourceTree = "<group>";
 		};
@@ -235,9 +237,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		52DD7FB21B9DF03B001257DD /* Intro_iOS_Camera */ = {
+		52DD7FB21B9DF03B001257DD /* AugmentedReality */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52DD7FD61B9DF03B001257DD /* Build configuration list for PBXNativeTarget "Intro_iOS_Camera" */;
+			buildConfigurationList = 52DD7FD61B9DF03B001257DD /* Build configuration list for PBXNativeTarget "AugmentedReality" */;
 			buildPhases = (
 				52DD7FAF1B9DF03B001257DD /* Sources */,
 				52DD7FB01B9DF03B001257DD /* Frameworks */,
@@ -247,14 +249,14 @@
 			);
 			dependencies = (
 			);
-			name = Intro_iOS_Camera;
+			name = AugmentedReality;
 			productName = Intro_iOS_Camera;
 			productReference = 52DD7FB31B9DF03B001257DD /* Intro_iOS_Camera.app */;
 			productType = "com.apple.product-type.application";
 		};
-		52DD7FCB1B9DF03B001257DD /* Intro_iOS_CameraTests */ = {
+		52DD7FCB1B9DF03B001257DD /* AugmentedRealityTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52DD7FD91B9DF03B001257DD /* Build configuration list for PBXNativeTarget "Intro_iOS_CameraTests" */;
+			buildConfigurationList = 52DD7FD91B9DF03B001257DD /* Build configuration list for PBXNativeTarget "AugmentedRealityTests" */;
 			buildPhases = (
 				52DD7FC81B9DF03B001257DD /* Sources */,
 				52DD7FC91B9DF03B001257DD /* Frameworks */,
@@ -265,7 +267,7 @@
 			dependencies = (
 				52DD7FCE1B9DF03B001257DD /* PBXTargetDependency */,
 			);
-			name = Intro_iOS_CameraTests;
+			name = AugmentedRealityTests;
 			productName = Intro_iOS_CameraTests;
 			productReference = 52DD7FCC1B9DF03B001257DD /* Intro_iOS_CameraTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -289,7 +291,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 52DD7FAE1B9DF03B001257DD /* Build configuration list for PBXProject "Intro_iOS_Camera" */;
+			buildConfigurationList = 52DD7FAE1B9DF03B001257DD /* Build configuration list for PBXProject "AugmentedReality" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -302,8 +304,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				52DD7FB21B9DF03B001257DD /* Intro_iOS_Camera */,
-				52DD7FCB1B9DF03B001257DD /* Intro_iOS_CameraTests */,
+				52DD7FB21B9DF03B001257DD /* AugmentedReality */,
+				52DD7FCB1B9DF03B001257DD /* AugmentedRealityTests */,
 			);
 		};
 /* End PBXProject section */
@@ -375,7 +377,7 @@
 /* Begin PBXTargetDependency section */
 		52DD7FCE1B9DF03B001257DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 52DD7FB21B9DF03B001257DD /* Intro_iOS_Camera */;
+			target = 52DD7FB21B9DF03B001257DD /* AugmentedReality */;
 			targetProxy = 52DD7FCD1B9DF03B001257DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -503,7 +505,7 @@
 					/usr/local/Cellar/armadillo/6.200.4/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Enxhell.Intro-iOS-Camera";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AugmentedReality;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -528,7 +530,7 @@
 					/usr/local/Cellar/armadillo/6.200.4/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Enxhell.Intro-iOS-Camera";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AugmentedReality;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -547,8 +549,8 @@
 				);
 				INFOPLIST_FILE = Intro_iOS_CameraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Intro_iOS_Camera.app/Intro_iOS_Camera";
+				PRODUCT_NAME = AugmentedReality;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AugmentedReality.app/AugmentedReality";
 			};
 			name = Debug;
 		};
@@ -562,15 +564,15 @@
 				);
 				INFOPLIST_FILE = Intro_iOS_CameraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Intro_iOS_Camera.app/Intro_iOS_Camera";
+				PRODUCT_NAME = AugmentedReality;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AugmentedReality.app/AugmentedReality";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		52DD7FAE1B9DF03B001257DD /* Build configuration list for PBXProject "Intro_iOS_Camera" */ = {
+		52DD7FAE1B9DF03B001257DD /* Build configuration list for PBXProject "AugmentedReality" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52DD7FD41B9DF03B001257DD /* Debug */,
@@ -579,7 +581,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52DD7FD61B9DF03B001257DD /* Build configuration list for PBXNativeTarget "Intro_iOS_Camera" */ = {
+		52DD7FD61B9DF03B001257DD /* Build configuration list for PBXNativeTarget "AugmentedReality" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52DD7FD71B9DF03B001257DD /* Debug */,
@@ -588,7 +590,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52DD7FD91B9DF03B001257DD /* Build configuration list for PBXNativeTarget "Intro_iOS_CameraTests" */ = {
+		52DD7FD91B9DF03B001257DD /* Build configuration list for PBXNativeTarget "AugmentedRealityTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52DD7FDA1B9DF03B001257DD /* Debug */,
