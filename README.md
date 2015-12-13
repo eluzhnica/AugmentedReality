@@ -3,6 +3,9 @@
 
 This implementation detects a national flag, classifies it and then it augments an image of a famous picture from that country on the flag. All this is done in real-time. The application is supposed to run on iOS devices therefore it is optimized for that architecture.
 
+[![Alt text for your video](http://img.youtube.com/vi/T-D1KVIuvjA/0.jpg)](https://youtu.be/8YtrPASa8Yc)
+
+
 ###Tools
 OpenCV and Armadillo
 
