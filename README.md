@@ -28,9 +28,9 @@ The tracking is done using KLT only on the corners of the quadrilateral. The det
 ###Results and efficiency
 From the programatic timers we get that the frame rate for the detection part is on average 90fps while the tracking part is 110fps. These are not completely accurate numbers, since the timers are not guaranteed to be exact and the error in timers can accumulate. Below we can find the app in action.
 
-![alt tag](http://postimg.org/image/7tl8wkfa9)
+![alt tag](http://s13.postimg.org/830girzxz/image_10.jpg)
 
-![alt tag](http://postimg.org/image/iuge1l7j5)
+![alt tag](http://s13.postimg.org/47x2g7gs7/image_11.jpg)
 
 Worth mentioning is that, there was a 1.5 times increase in efficiency by only reordering the double loop order of accessing of the image pixels when trying to extract the colors. Of course, this was under special circumstances where there would be a lot of other apps open in the device. The reason was that Mat matrices are ordered differently, so it matters if we access by column or by row because of the cache.
 Armadillo usage in perspective warping gave also about 1.5-2 times increase in efficiency. Generally, the assumption would be that we would get more, however the conversion between formats that needs to happen consumes a fair bit of time. Hopefully, if we move everything to Armadillo we will make the other parts faster, and the conversion would be re-used.
