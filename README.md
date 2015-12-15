@@ -45,3 +45,5 @@ Armadillo usage in perspective warping gave also about 1.5-2 times increase in e
 
 ###Extensions
 This will be soon extended to augment 3D objects of the famous objects. For this we will use available point clouds.
+
+(The current implementation has only two famous objects for China and Kosovo, but all the other features are implemented.)
